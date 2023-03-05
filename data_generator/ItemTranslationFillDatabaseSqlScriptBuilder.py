@@ -38,7 +38,7 @@ queryToCreateLanguage = """INSERT INTO "translation"."language" (iso_code, iso_n
 queryToFindLangaugeByIsoCode = """SELECT l.id FROM "translation"."language" l WHERE l.iso_code LIKE '{}'"""
 queryToCreateTextContent = """INSERT INTO "translation".text_content (original_text, language_id) VALUES('{}', ({}))"""
 queryToFindTextContentByOrigalName = """SELECT tc.id FROM "translation".text_content tc WHERE tc.original_text like '{}'"""
-queryToCreateItem = """INSERT INTO item.item (uuid, "name", text_content_id) VALUES('{}', '{}', ({}));"""
+queryToCreateItem = """INSERT INTO item.item ("name", text_content_id) VALUES('{}', ({}));"""
 queryToCreateTranslation = """INSERT INTO "translation"."translation" ("translation", text_content_id, language_id) VALUES('{}', ({}), ({}));"""
 
 now = datetime.datetime.now().timestamp()
@@ -63,7 +63,7 @@ for product in products.index:
     originalNameTextContent = products[mainLanguage][product]
     f.write(queryToCreateTextContent.format(originalNameTextContent,
             queryToFindLangaugeByIsoCode.format(enLanguage.code))+";\n")
-    f.write(queryToCreateItem.format(str(uuid.uuid4()), originalNameTextContent,
+    f.write(queryToCreateItem.format(originalNameTextContent,
             queryToFindTextContentByOrigalName.format(originalNameTextContent))+"\n")
     for language in filter(lambda p: p.name != mainLanguage, languages):
         languageTemp = findFirstLanguageObject(language)

@@ -23,7 +23,7 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
               INNER JOIN "translation".text_content tc ON tc.id = i.text_content_id
               INNER JOIN "translation"."language" l ON l.id = tc.language_id
             WHERE
-              i."name" LIKE %:itemName%
+              LOWER(i."name") LIKE LOWER(CONCAT('%',:itemName,'%'))
               AND l.iso_code LIKE :languageIsoCode
             UNION ALL
             SELECT
@@ -45,7 +45,7 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
                   INNER JOIN "translation".text_content tc ON tc.id = i.text_content_id
                   INNER JOIN "translation"."language" l ON l.id = tc.language_id
                 WHERE
-                  i."name" LIKE %:itemName%
+                  LOWER(i."name") LIKE LOWER(CONCAT('%',:itemName,'%'))
             )
             """, nativeQuery = true)
     List<TranslatedItem> getTranslatedItemByNameAndLanguageIsoCode(@Param("itemName") String itemName,

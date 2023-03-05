@@ -21,7 +21,7 @@ public class PocMultiLanguageApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<TranslatedItem> translatedItemList = itemRepository.getTranslatedItemByNameAndLanguageIsoCode("an", "en");
+        List<TranslatedItem> translatedItemList = itemRepository.getTranslatedItemByNameAndLanguageIsoCode("AN", "en");
         int a =0;
     }
 }

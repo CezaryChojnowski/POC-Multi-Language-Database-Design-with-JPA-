@@ -1,0 +1,1 @@
+docker run -dit --name poc-multi-language --restart=always -e MYSQL_ROOT_PASSWORD=rootPassword -e POSTGRES_DB=poc-multi-language -e POSTGRES_USER=dev -e POSTGRES_PASSWORD=dev -p 5435:5432 postgres:14.5

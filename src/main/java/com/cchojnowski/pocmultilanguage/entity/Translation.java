@@ -20,7 +20,7 @@ public class Translation {
     private String translation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "text_context_id")
+    @JoinColumn(name = "text_content_id")
     private TextContent textContent;
 
     @ManyToOne(fetch = FetchType.LAZY)

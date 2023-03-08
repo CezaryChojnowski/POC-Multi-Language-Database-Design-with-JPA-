@@ -1,0 +1,60 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create item and translation schema" author="cchojnowski">
+        <sql>
+            CREATE SCHEMA IF NOT EXISTS item;
+            CREATE SCHEMA IF NOT EXISTS translation;
+        </sql>
+    </changeSet>
+
+    <changeSet author="cchojnowski (generated)" id="1678024571695-1">
+        <createTable schemaName="item" tableName="item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="item_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(50)"/>
+            <column name="text_content_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="cchojnowski (generated)" id="1678024571695-2">
+        <createTable schemaName="translation" tableName="language">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="language_pkey"/>
+            </column>
+            <column name="iso_code" type="VARCHAR(2)"/>
+            <column name="iso_name" type="VARCHAR(15)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="cchojnowski (generated)" id="1678024571695-3">
+        <createTable schemaName="translation" tableName="text_content">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="text_content_pkey"/>
+            </column>
+            <column name="original_text" type="VARCHAR(50)"/>
+            <column name="language_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="cchojnowski (generated)" id="1678024571695-4">
+        <createTable schemaName="translation" tableName="translation">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="translation_pkey"/>
+            </column>
+            <column name="translation" type="VARCHAR(50)"/>
+            <column name="text_content_id" type="BIGINT"/>
+            <column name="language_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="cchojnowski (generated)" id="1678024571695-5">
+        <addForeignKeyConstraint baseColumnNames="text_content_id" baseTableName="item" baseTableSchemaName="item" constraintName="fk_item_item_translation_text_content_text_content_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="text_content" referencedTableSchemaName="translation" validate="true"/>
+    </changeSet>
+    <changeSet author="cchojnowski (generated)" id="1678024571695-6">
+        <addForeignKeyConstraint baseColumnNames="language_id" baseTableName="text_content" baseTableSchemaName="translation" constraintName="fk_translation_text_content_translation_language_language_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="language" referencedTableSchemaName="translation" validate="true"/>
+    </changeSet>
+    <changeSet author="cchojnowski (generated)" id="1678024571695-7">
+        <addForeignKeyConstraint baseColumnNames="language_id" baseTableName="translation" baseTableSchemaName="translation" constraintName="fk_translation_translation_translation_language_language_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="language" referencedTableSchemaName="translation" validate="true"/>
+    </changeSet>
+    <changeSet author="cchojnowski (generated)" id="1678024571695-8">
+        <addForeignKeyConstraint baseColumnNames="text_content_id" baseTableName="translation" baseTableSchemaName="translation" constraintName="fk_translation_translation_translation_text_content_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="text_content" referencedTableSchemaName="translation" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

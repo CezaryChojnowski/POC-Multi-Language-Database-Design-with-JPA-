@@ -6,5 +6,11 @@ package com.cchojnowski.pocmultilanguage.dto;
 public interface TranslatedItem {
     Long getItemId();
     String getTranslatedName();
-    String getIsoCode();
+
+    default TranslatedItemDTO map() {
+       return TranslatedItemDTO.builder()
+               .itemId(this.getItemId())
+               .translatedName(this.getTranslatedName())
+               .build();
+    }
 }

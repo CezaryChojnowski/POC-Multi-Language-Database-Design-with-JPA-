@@ -1,0 +1,4 @@
+liquibase --driver=org.postgresql.Driver --changeLogFile=./structure.xml --url="jdbc:postgresql://localhost:5435/poc-multi-language" --username=dve --password=dev generateChangeLog
+
+
+mvn liquibase:generateChangeLog -Dliquibase.url=jdbc:postgresql://localhost:5435/poc-multi-language Dliquibase.username=dev -Dliquibase.password=dev -Dliquibase.driver=org.postgresql.Driver -Dliquibase.outputChangeLogFile=./changelog-mvn.sql -Dliquibase.schemas=public,item,translation -Dliquibase.includeSchema=true

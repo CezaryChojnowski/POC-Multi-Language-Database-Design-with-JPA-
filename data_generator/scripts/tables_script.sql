@@ -1,10 +1,10 @@
 CREATE SCHEMA IF NOT EXISTS item;
-DROP TABLE item.item;
+DROP TABLE IF EXISTS item.item;
 
 CREATE SCHEMA IF NOT EXISTS translation;
-DROP TABLE "translation"."translation";
-DROP TABLE "translation".text_content;
-DROP TABLE "translation"."language";
+DROP TABLE IF EXISTS "translation"."translation";
+DROP TABLE IF EXISTS "translation".text_content;
+DROP TABLE IF EXISTS "translation"."language";
 
 
 CREATE TABLE item.item (
